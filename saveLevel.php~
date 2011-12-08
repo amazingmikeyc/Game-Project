@@ -1,0 +1,12 @@
+<?php
+
+include("db.php");
+print_r($_POST);
+$serialised = mysql_real_escape_string(json_encode($_POST),$connection);
+
+$sql = 'insert into level (serialised_level) values ("'.$serialised.'")';
+
+mysql_query($sql, $connection);
+
+echo $sql;
+?>

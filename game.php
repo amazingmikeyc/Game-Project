@@ -6,13 +6,13 @@
 canvas {
 	width:800px;
 	height:600px;
-
 	
 	border:1px black dotted;
 }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" ></script>
+<script src="animation.js"></script>
 <script src="game.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/themes/base/jquery-ui.css" type="text/css" media="all" /> 
@@ -32,5 +32,5 @@ canvas {
 <p>Save the level: <br><code>savelevel();</code></p>		
 </div>
 </body>
-
+<img src='game_images/sonic2beta.png'>
 </html>

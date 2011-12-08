@@ -1,7 +1,7 @@
 var thescreen;
 var player;
 var blocks;
-
+	
 var statuswindow;
 var thelevel;
 
@@ -26,6 +26,9 @@ function loadLevel(level) {
 		thelevel.foreground.add(new staticObject(objects[o].x, objects[o].y,'' +  imgArray[objects[o].i]));
 		console.log('item created, '+objects[o].x+'x'+objects[o].y + ' - ' + imgArray[objects[o].i]);
 	}
+	
+
+	
 
 	thelevel.backdrop.add(new staticObject(-3000,-880,'game_images/clouds.png'));
 	thelevel.backdrop.add(new staticObject(3400,-880,'game_images/clouds.png'));
@@ -111,6 +114,8 @@ $(document).ready(function() {
 		statuswindow.draw(thescreen);
 		
 		thelevel.drawHighlights(thescreen);
+	
+		thescreen.switch();
 	
 	
 	},10);
@@ -328,9 +333,37 @@ function screen() {
 	this.left = 0;
 	this.top  = 0;
 
-	canvas = document.getElementById('frame1');
+	canvas = document.getElementById('frame1'); 
 
-	this.ctx = canvas.getContext('2d');
+	this.canvas1 = document.createElement('canvas');;
+	this.canvas1.width=800;
+	this.canvas1.height=600;
+	this.canvas2 = document.createElement('canvas');;
+	this.canvas2.width=800;
+	this.canvas2.height=600;
+	this.current = 1;
+
+	this.switch = function() {
+	
+	console.log(this.current);
+	
+		if (this.current==1) {
+			currentCanvas = this.canvas2;
+			this.ctx = this.canvas1.getContext('2d');
+			this.current=2;
+		}
+		else {
+			currentCanvas = this.canvas1;
+			this.ctx = this.canvas2.getContext('2d');
+			this.current=1;
+		}
+		
+			this.mainctx.drawImage(currentCanvas,0,0,800,600);
+	}
+
+	this.mainctx = canvas.getContext('2d');
+
+	this.ctx = this.canvas1.getContext('2d');
 
 }
 
@@ -381,19 +414,44 @@ function playableObject(id, image) {
 	this.image = new Image();
 	this.image.src = 'game_images/man.png';
 
+	this.animationRight = new Animation();
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',162,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',191,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',230,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',272,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',306,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',337,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',367,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',403,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',438,0,39,26));	
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',479,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',517,0,39,26));
+	this.animationRight.addFrame(new Frame('game_images/sonic2beta.png',553,0,39,26));
 	
-
-
+	this.animationLeft = new Animation();
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',0,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',36,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',75,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',116,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',150,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',186,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',218,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',250,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',284,40,39,26));	
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',326,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',364,40,39,26));
+	this.animationLeft.addFrame(new Frame('game_images/sonic2beta.png',396,40,39,26));
+	
 	//functions
 	this.draw = function(ctx) {
 		if (this.direction=='left') {
-			pos = 21;
+			this.animationLeft.draw(ctx, this.left-thescreen.left, this.top-thescreen.top, this.width, this.height);
 		}
 		else {
-			pos = 0;
+			this.animationRight.draw(ctx, this.left-thescreen.left, this.top-thescreen.top, this.width, this.height);
 		}
 
-		ctx.drawImage(this.image, pos,0,22,40,this.left-thescreen.left, this.top-thescreen.top , this.width,this.height);
+
 	}
 	
 	//What's our man doing?

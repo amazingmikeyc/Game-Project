@@ -15,11 +15,10 @@ function Animation() {
 	this.draw = function(ctx, x, y) {
 	
 		if (this.images.length>0) {
-			console.log(this.currentFrameCount);
-			
+					
 			this.currentFrameCount++;	
 			
-			if (this.currentFrameCount>this.images.length) {
+			if (this.currentFrameCount>=this.images.length) {
 				this.currentFrameCount=0;
 			}
 			
@@ -38,7 +37,6 @@ function Animation() {
 
 	this.addFrame = function(frame) {
 		this.images.push(frame); 
-		console.log(frame.top);
 	}   
 
 } 

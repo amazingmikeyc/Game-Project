@@ -345,8 +345,6 @@ function screen() {
 
 	this.switch = function() {
 	
-	console.log(this.current);
-	
 		if (this.current==1) {
 			currentCanvas = this.canvas2;
 			this.ctx = this.canvas1.getContext('2d');
